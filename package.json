@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "app",
+=======
+  "name": "expense-tracker",
+>>>>>>> f4eba0c (init commit)
   "module": "server/index.ts",
   "type": "module",
   "scripts": {
