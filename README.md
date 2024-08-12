@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 # Expense Tracker App
 
 As a way of teaching myself the fundamentals of modern fullstack web development, I've followed a tutorial to create this live expense tracker, using React, Bun, Hono, and Tanstack, along with Tailwind CSS, shadcn/ui components, and more to come as I complete the tutorial.
 
-=======
->>>>>>> f4eba0c (init commit)
 # app
 
 To install dependencies:
