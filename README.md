@@ -1,19 +1,76 @@
-# Expense Tracker App
+# Expense Tracker Web App
 
-As a way of teaching myself the fundamentals of modern fullstack web development, I've followed a tutorial to create this live expense tracker, using React, Bun, Hono, and Tanstack, along with Tailwind CSS, shadcn/ui components, and more to come as I complete the tutorial.
+## Overview
 
-# app
+As a way of teaching myself the fundamentals of modern full-stack web development, I've followed a tutorial to create a practical, real-world application using best practices and bleeding-edge technologies. This project allows a user to register via email, create and manage expenses, and (soon) even view detailed expense reports.
 
-To install dependencies:
+## Live Demo
 
-```bash
-bun install
+[https://oscar-gabriel-expense-tracker.fly.dev/](https://oscar-gabriel-expense-tracker.fly.dev/)
+
+## Tech Stack
+
+- Complete expense tracker app built from scratch using react 18/19, bun, and hono
+- 100% backend and frontend TypeScript with validation using Zod
+- Hono Typescript RPC for type-safe HTTP requests
+- User auth managed by Kinde Auth
+- Tanstack Router, Query, and Form for the best UX and DX in an SPA
+- Drizzle ORM for all interactions with a Postgres Database
+- Hosted on fly.io VPS
+- Clean, modern UI using tailwind & shadcn-ui
+
+## Key Features
+
+- User authentication and authorization
+- Full CRUD functionality for expenses
+- Date picker for selecting expense dates
+- Responsive design for mobile and desktop use
+
+## Project Structure
+
+```
+.
+├── Dockerfile
+├── README.md
+├── drizzle/
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── lib/
+│   │   └── routes/
+├── server/
+│   ├── db/
+│   └── routes/
+└── package.json
 ```
 
-To run:
+- `frontend/`: Contains the React application
+- `server/`: Houses the Hono backend
+- `drizzle/`: Includes database migration files
 
-```bash
-bun run index.ts
-```
+## Getting Started
 
-This project was created using `bun init` in bun v1.1.22. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+1. Clone the repository
+2. Install dependencies:
+   ```
+   bun install
+   ```
+3. Set up your environment variables
+4. Run the development server:
+   ```
+   bun run dev
+   ```
+
+## Deployment
+
+The application is containerized using Docker and can be deployed to Fly.io or any other container-friendly hosting platform.
+
+## Acknowledgements
+
+This project was completed by following [this tutorial](https://www.youtube.com/watch?v=jXyTIQOfTTk&t=3145s) (courtesy of [Sam Meech-Ward](https://github.com/meech-ward)), which provided great guidance and context all along the way.
+
+## Future Improvements
+
+- Implement data visualization for expense trends
+- Add budget setting and tracking features
+- Integrate with third-party financial services

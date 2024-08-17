@@ -10,29 +10,26 @@ import {
 
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { api } from "@/lib/api";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
+import {
+  deleteExpense,
+  getAllExpensesQueryOptions,
+  loadingCreateExpenseQueryOptions,
+} from "@/lib/api";
+import { Button } from "@/components/ui/button";
+import { Trash } from "lucide-react";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/_authenticated/expenses")({
   component: Expenses,
 });
 
-async function getAllExpenses() {
-  const res = await api.expenses.$get();
-  if (!res.ok) {
-    throw new Error("server error");
-  }
-  const data = await res.json();
-  return data;
-}
-
 function Expenses() {
-  // Queries
-  const { isPending, error, data } = useQuery({
-    queryKey: ["get-all-expenses"],
-    queryFn: getAllExpenses,
-  });
+  const { isPending, error, data } = useQuery(getAllExpensesQueryOptions);
+  const { data: loadingCreateExpense } = useQuery(
+    loadingCreateExpenseQueryOptions
+  );
 
   if (error) return "An error has occurred: " + error.message;
 
@@ -46,15 +43,34 @@ function Expenses() {
             <TableHead>Title</TableHead>
             <TableHead>Amount</TableHead>
             <TableHead>Date</TableHead>
+            <TableHead>Delete</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
+          {loadingCreateExpense?.expense && (
+            <TableRow>
+              <TableCell className="font-medium">
+                <Skeleton className="h-4" />
+              </TableCell>
+              <TableCell>{loadingCreateExpense?.expense.title}</TableCell>
+              <TableCell>{loadingCreateExpense?.expense.amount}</TableCell>
+              <TableCell>
+                {loadingCreateExpense?.expense.date.split("T")[0]}
+              </TableCell>
+              <TableCell className="font-medium">
+                <Skeleton className="h-4" />
+              </TableCell>
+            </TableRow>
+          )}
           {isPending
             ? Array(3)
                 .fill(0)
                 .map((_, i) => (
                   <TableRow key={i}>
                     <TableCell className="font-medium">
+                      <Skeleton className="h-4" />
+                    </TableCell>
+                    <TableCell>
                       <Skeleton className="h-4" />
                     </TableCell>
                     <TableCell>
@@ -74,10 +90,50 @@ function Expenses() {
                   <TableCell>{expense.title}</TableCell>
                   <TableCell>{expense.amount}</TableCell>
                   <TableCell>{expense.date.split("T")[0]}</TableCell>
+                  <TableCell>
+                    <ExpenseDeleteButton id={expense.id} />
+                  </TableCell>
                 </TableRow>
               ))}
         </TableBody>
       </Table>
     </div>
+  );
+}
+
+function ExpenseDeleteButton({ id }: { id: number }) {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: deleteExpense,
+    onError: () => {
+      toast("Error", {
+        description: `Failed to delete expense: ${id}`,
+      });
+    },
+    onSuccess: () => {
+      toast("Success", {
+        description: `Successfully deleted expense: ${id}`,
+      });
+
+      queryClient.setQueryData(
+        getAllExpensesQueryOptions.queryKey,
+        (existingExpenses) => ({
+          ...existingExpenses,
+          expenses: existingExpenses!.expenses.filter((e) => e.id !== id),
+        })
+      );
+    },
+  });
+
+  return (
+    <Button
+      disabled={mutation.isPending}
+      variant="outline"
+      size="icon"
+      onClick={() => mutation.mutate({ id })}
+    >
+      {mutation.isPending ? "..." : <Trash className="w-4 h-4" />}
+    </Button>
   );
 }
