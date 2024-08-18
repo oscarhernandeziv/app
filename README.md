@@ -4,10 +4,6 @@
 
 As a way of teaching myself the fundamentals of modern full-stack web development, I've followed a tutorial to create a practical, real-world application using best practices and bleeding-edge technologies. This project allows a user to register via email, create and manage expenses, and (soon) even view detailed expense reports.
 
-## Live Demo
-
-[https://oscar-gabriel-expense-tracker.fly.dev/](https://oscar-gabriel-expense-tracker.fly.dev/)
-
 ## Tech Stack
 
 - Complete expense tracker app built from scratch using react 18/19, bun, and hono
@@ -16,7 +12,6 @@ As a way of teaching myself the fundamentals of modern full-stack web developmen
 - User auth managed by Kinde Auth
 - Tanstack Router, Query, and Form for the best UX and DX in an SPA
 - Drizzle ORM for all interactions with a Postgres Database
-- Hosted on fly.io VPS
 - Clean, modern UI using tailwind & shadcn-ui
 
 ## Key Features
