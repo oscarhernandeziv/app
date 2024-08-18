@@ -1,8 +1,12 @@
-# Expense Tracker Web App
+# PARSUS - Expense Tracker Web App
 
 ## Overview
 
-As a way of teaching myself the fundamentals of modern full-stack web development, I've followed a tutorial to create a practical, real-world application using best practices and bleeding-edge technologies. This project allows a user to register via email, create and manage expenses, and (soon) even view detailed expense reports.
+As a way of teaching myself the fundamentals of modern full-stack web development, I've followed a tutorial to create a practical, real-world application using best practices and bleeding-edge technologies. This project, which I've named PARSUS, allows a user to register via email, create and manage expenses, and (soon) even view detailed expense reports.
+
+## Live Demo
+
+https://parsus.fly.dev/
 
 ## Tech Stack
 
