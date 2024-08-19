@@ -1,5 +1,5 @@
 {
-  "name": "expense-tracker",
+  "name": "app",
   "module": "server/index.ts",
   "type": "module",
   "scripts": {
